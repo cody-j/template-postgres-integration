@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  database:
+    image: postgres:14
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=test
+      - DB_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    networks:
+      - test
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=test
+    healthcheck:
+      test: ["CMD", "curl", "-f", "api:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - test
+  test:
+    build:
+      context: ./test
+      dockerfile: Dockerfile
+    depends_on:
+      api:
+        condition: service_started
+    networks:
+      - test
+networks:
+  test:
+    driver: bridge
+      

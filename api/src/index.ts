@@ -5,8 +5,9 @@ process.on('uncaughtException', (error) => {
   process.exit(1);
 });
 
-const server = app.listen(3333, () => {
-  console.log(`Server running on port ${3333}`);
+const PORT = 3000;
+const server = app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
 // Graceful shutdown
