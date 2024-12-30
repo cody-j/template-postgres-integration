@@ -2,7 +2,7 @@ FROM node:18-buster-slim AS builder
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
-COPY . .
+COPY src tsconfig.json ./
 RUN npx tsc
 
 FROM node:18-buster-slim AS production
