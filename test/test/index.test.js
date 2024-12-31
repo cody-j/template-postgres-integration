@@ -5,7 +5,7 @@ const { Client } = require('pg');
 const db = new Client({
     user: 'postgres',
     password: 'postgres',
-    host: 'localhost', // Docker host alias
+    host: 'database', // Docker host alias
     port: 5432,
     database: 'test' // matches POSTGRES_DB variable in database Dockerfile https://hub.docker.com/_/postgres
 });
