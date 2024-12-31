@@ -9,9 +9,6 @@ const pool = new Pool({
 });
 
 export async function increment(id: string): Promise<any> {
-    /**
-     * 
-     */
     return await pool.query(`
         insert into "test"."test"
             ("id")
