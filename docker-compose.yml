@@ -21,8 +21,6 @@ services:
   api:
     build:
       context: ./api
-    ports:
-      - 3000:3000
     environment:
       - NODE_ENV=test
     healthcheck:
@@ -39,7 +37,6 @@ services:
   test:
     build:
       context: ./test
-      dockerfile: Dockerfile
     depends_on:
       api:
         condition: service_started
