@@ -37,6 +37,8 @@ services:
   test:
     build:
       context: ./test
+    environment:
+      - POSTGRES_HOST=database
     depends_on:
       api:
         condition: service_started
