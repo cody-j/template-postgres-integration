@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "POSTGRES_HOST=localhost jest --detectOpenHandles"
+    "test": "POSTGRES_HOST=localhost API_HOST=localhost jest --detectOpenHandles"
   },
   "devDependencies": {
     "jest": "^29.7.0"
